@@ -2,3 +2,5 @@ Beautifulsoup4
 requests
 fastapi
 beautifulsoup4 
+python-dotenv
+uvicorn
