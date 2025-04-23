@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Query, HTTPException
-from app.scraper import ScrapeTextFromURL
-from app.summarizer import summarize_text
+from app.scraper import Website
+from app.summarizer import Summarize
 
 app = FastAPI(
     title="LLM Web Summarizer",
@@ -12,15 +12,16 @@ app = FastAPI(
 async def summarize(url: str=Query(..., description="URL of the webpage to summarize")):
     try:
         # scrape the webpage
-        text = text.ScrapeTextFromURL(url)
-        if not text:
+        website = Website(url)
+        web_title, web_text = website.title, website.text
+        if not web_text:
             raise HTTPException(status_code=400, detail="No content foun at the webpage")
         
         # summarize the content 
-        summary = summarize_text(text)
+        summary = Summarize(website)
         return {
             "url":url,
-            "summary":summary
+            "summary":summary.summarize_using_ollama()
         }
     
     except Exception as e:
