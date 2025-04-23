@@ -46,18 +46,14 @@ class Summarize():
             model=OpenAI_MODEL,
             messages=messages_for(self.website)
         )
-        self.openai_response = openai_response.choices[0].message.content
+        return display(Markdown(openai_response.choices[0].message.content))
     
     def summarize_using_ollama(self):
         ollama_response = ollama_via_openai.chat.completions.create(
             model=OLLAMA_MODEL,
             messages=messages_for(self.website)
         )
-        self.ollama_response=ollama_response.choices[0].message.content 
-    
-    def openn_ai_display(self):
-        display(Markdown(self.openai_response))
-        
-    def display_ollama_response(self):
-        display(Markdown(self.ollama_response))
+        return display(Markdown(ollama_response.choices[0].message.content))
+
+
         
