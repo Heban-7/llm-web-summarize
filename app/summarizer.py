@@ -7,7 +7,6 @@ from openai import OpenAI
 load_dotenv(override=True)
 API_KEY= os.getenv('OPENAI_API_KEY')
 OpenAI_MODEL=os.getenv("OPENAI_MODEL")
-OLLAMA_URL = os.getenv('OLLAMA_URL')
 OLLAMA_MODEL = os.getenv('OLLAMA_MODEL')
 
 # Call openai
@@ -38,6 +37,9 @@ def messages_for(website):
     ]
 
 class Summarize():
+    """
+    Sumarize and display the scraped web page
+    """
     def __init__(self, website):
         self.website = website
     
